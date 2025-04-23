@@ -1,0 +1,6 @@
+mcp[cli]
+openai
+python-dotenv
+ipykernel
+httpx
+pydantic_ai
