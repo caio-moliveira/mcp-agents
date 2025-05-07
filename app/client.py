@@ -1,6 +1,6 @@
 # app/client.py
-from app.mcp_tool import MCPServerAdapter
-from app.server import get_supabase_server_params
+from mcp_tool import MCPServerAdapter
+from server import get_supabase_server_params
 
 
 def load_supabase_tools(extra_tools=None):
