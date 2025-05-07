@@ -1,0 +1,32 @@
+Dataset: products.csv
+
+Summary Statistics:
+- PRICE:
+  - Mean: 258.71
+  - Median: 275.99
+  - Mode: None
+  - Min: 22.21
+  - Max: 497.95
+- STOCK_QUANTITY:
+  - Mean: 56.82
+  - Median: 67
+  - Mode: 72
+  - Min: 2
+  - Max: 95
+
+Missing Values:
+- No missing values detected.
+
+Duplicates:
+- No duplicate PRODUCT_ID found.
+
+Data Types:
+- PRODUCT_ID: string
+- NAME: string
+- CATEGORY: string
+- PRICE: float
+- STOCK_QUANTITY: integer
+- AVAILABLE: boolean
+
+Cleaning Required:
+- No cleaning required. Data is clean and ready for use.
