@@ -1,8 +1,5 @@
 from crewai import Agent, Task, Crew, Process
-from crewai_tools import (
-    FileReadTool,
-    CodeInterpreterTool,
-)
+from crewai_tools import FileReadTool
 from client.client import load_supabase_tools, load_filesystem_tools
 from langchain_openai import ChatOpenAI
 import os
@@ -28,10 +25,10 @@ def create_crew():
     project_name = "mcp-project"
     project_id = os.getenv("SUPABASE_PROJECT_ID")
 
+    # Tools
     file_tool = FileReadTool(file_path=csv_file_path)
-    supabase_tools = load_supabase_tools(extra_tools=[file_tool])
-
-    eda_tools = load_filesystem_tools(extra_tools="")
+    supabase_tools = load_supabase_tools()
+    eda_tools = load_filesystem_tools()
 
     # EDA Agent
     eda_agent = Agent(
@@ -55,7 +52,8 @@ def create_crew():
             "If you find inconsistencies, schema mismatches, or invalid data, you must refuse to ingest and provide a clear explanation. "
             "When valid data is provided, you perform a safe, append-only insertion, deduplicating records if necessary."
         ),
-        tools=supabase_tools,
+        tools=[supabase_tools, file_tool],
+        llm=llm,
         verbose=True,
     )
 
