@@ -1,0 +1,8 @@
+https://github.com/narumiruna/yfinance-mcp
+https://github.com/jlowin/fastmcp
+https://github.com/supabase-community/supabase-mcp
+https://github.com/crewAIInc/crewAI-tools/tree/main
+https://github.com/upstash/context7
+https://github.com/github/github-mcp-server
+https://github.com/ckreiling/mcp-server-docker?
+https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search
