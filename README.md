@@ -78,9 +78,9 @@ uv pip install -e .
 ```
 
 ### 3. Set up environment variables
-- Copy `examplo-env.env` to `.env`:
+- Copy `example-env.env` to `.env`:
   ```sh
-  cp examplo-env.env .env
+  cp example-env.env .env
   ```
 - Fill in your API keys and tokens as shown in the example file.
 
@@ -91,7 +91,7 @@ uv pip install -e .
 - All sensitive credentials (API keys, tokens) are managed via the `.env` file.
 - Required variables include:
   - `OPENAI_API_KEY`, `SUPABASE_ACCESS_TOKEN`, `BRAVE_API_KEY`, `GITHUB_PERSONAL_ACCESS_TOKEN`, etc.
-- See `examplo-env.env` for a full list and format.
+- See `example-env.env` for a full list and format.
 
 ---
 
