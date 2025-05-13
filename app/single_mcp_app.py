@@ -30,7 +30,9 @@ for message in st.session_state.messages:
 async def call_agent(question: str):
     client = Client("http://127.0.0.1:8003/sse")  # Replace with your server URL
     async with client:
-        result = await client.call_tool("selenium_scraper_tool", {"question": question})
+        result = await client.call_tool(
+            "selenium_scraper_tool", {"question": question}
+        )  # replace with your tool name
         return result[0].text if result and hasattr(result[0], "text") else str(result)
 
 

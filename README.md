@@ -5,6 +5,7 @@ A professional, modular testbed for Model Context Protocol (MCP) servers and Cre
 ---
 
 ## Table of Contents
+- [Repository Structure](#repository-structure)
 - [Overview](#overview)
 - [Supported MCP Servers](#supported-mcp-servers)
 - [Quick Start](#quick-start)
@@ -14,6 +15,18 @@ A professional, modular testbed for Model Context Protocol (MCP) servers and Cre
 - [Usage Examples](#usage-examples)
 - [Contributing](#contributing)
 - [License](#license)
+
+---
+
+## Repository Structure
+
+- **src/**: Standalone MCP server modules (each file = one MCP server)
+- **app/**: Streamlit apps
+  - `multi_mcp_app.py`: Launches all MCP servers at once and lets the user select which LLM to use per query
+  - `single_mcp_app.py`: Example of a single MCP/LLM chat app
+- **llm/**: LLM provider definitions and utilities
+- **project/**: Main project logic, including a multi-agent server that combines two MCPs in a single agent
+- **examplo-env.env**: Example environment file showing required variables for `.env`
 
 ---
 
@@ -32,7 +45,7 @@ You can run each MCP server independently, or use the provided Streamlit apps fo
 ---
 
 ## Supported MCP Servers
-Each server is implemented as a Python module in `src/` or `project/`:
+Each server is implemented as a Python module in `src/`:
 
 | Server                | File                          | Purpose                                      | Default Port |
 |-----------------------|-------------------------------|----------------------------------------------|--------------|
@@ -43,7 +56,9 @@ Each server is implemented as a Python module in `src/` or `project/`:
 | Docker MCP            | `src/docker_mcp_server.py`    | Run tools in Docker containers               | 8002         |
 | Context7 Analyst      | `src/context7_mcp_server.py`  | Documentation/codebase Q&A                   | 8004         |
 | Selenium Scraper      | `src/selenium_mcp_server.py`  | Browser automation and scraping              | 8003         |
-| Multi-Agent Analyst   | `project/mcp_server.py`       | Unified access to YFinance & Supabase        | 8000         |
+
+**Multi-Agent Analyst:**
+- `project/mcp_server.py`: Unified access to YFinance & Supabase in a single agent (port 8000)
 
 ---
 
@@ -55,15 +70,19 @@ git clone <your-repo-url>
 cd mcp-test
 ```
 
-### 2. Install dependencies
+### 2. Install dependencies (using [UV](https://github.com/astral-sh/uv))
 ```sh
-pip install -r requirements.txt
-# or, if using Poetry:
-# poetry install
+uv pip install -r requirements.txt
+# or, for editable mode:
+uv pip install -e .
 ```
 
 ### 3. Set up environment variables
-Copy `.env.example` to `.env` and fill in your API keys (OpenAI, Supabase, Brave, GitHub, etc.).
+- Copy `examplo-env.env` to `.env`:
+  ```sh
+  cp examplo-env.env .env
+  ```
+- Fill in your API keys and tokens as shown in the example file.
 
 ---
 
@@ -72,7 +91,7 @@ Copy `.env.example` to `.env` and fill in your API keys (OpenAI, Supabase, Brave
 - All sensitive credentials (API keys, tokens) are managed via the `.env` file.
 - Required variables include:
   - `OPENAI_API_KEY`, `SUPABASE_ACCESS_TOKEN`, `BRAVE_API_KEY`, `GITHUB_PERSONAL_ACCESS_TOKEN`, etc.
-- See `.env` for a full list.
+- See `examplo-env.env` for a full list and format.
 
 ---
 
@@ -103,15 +122,22 @@ python project/mcp_server.py
 
 Two Streamlit apps are provided for interactive chat with MCP agents:
 
-- `src/streamlit_app.py`: Multi-agent chat with LLM and MCP selection
-- `project/app.py`: Unified analyst chat (multi-agent)
+- `app/multi_mcp_app.py`: Launches all MCP servers and lets you select the LLM and MCP for each query.
+- `app/single_mcp_app.py`: Example of a single MCP/LLM chat app.
 
 Run with:
 ```sh
-streamlit run src/streamlit_app.py
+streamlit run app/multi_mcp_app.py
 # or
-streamlit run project/app.py
+streamlit run app/single_mcp_app.py
 ```
+
+---
+
+## LLMs
+
+- The `llm/` folder contains all available LLM provider definitions.
+- You can select which LLM to use in the multi-agent Streamlit app.
 
 ---
 
