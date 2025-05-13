@@ -156,6 +156,45 @@ All actions are performed securely via CrewAI-powered agents and MCP tools.
 
 ---
 
+## Using MCP Servers with Desktop Claude
+
+You can connect any MCP server from this repository to Desktop Claude for seamless local tool integration.
+
+### 1. Start an MCP Server for Desktop Claude
+
+Use the `fastmcp` CLI to launch the desired MCP server. For example, to run the YFinance MCP server:
+
+```sh
+fastmcp run src/yfinance_mcp_server.py:mcp
+```
+
+Replace `yfinance_mcp_server.py` with any other MCP server file in `src/` as needed.
+
+### 2. Configure Desktop Claude
+
+Edit your `claude_desktop_config.json` file to add the MCP server. Example configuration for YFinance:
+
+```json
+{
+  "mcpServers": {
+    "yfinance-agent-server": {
+      "command": "<repository/path>/.venv/Scripts/python",
+      "args": [
+        "<repository/path>/src/yfinance_mcp_server.py"
+      ]
+    }
+  }
+}
+```
+
+- Replace `<repository/path>` with the absolute path to your local repository.
+- Ensure the Python executable path matches your environment (e.g., `.venv/Scripts/python` on Windows).
+- You can add multiple servers by duplicating the block under `mcpServers` and changing the server name and script.
+
+After saving the config, restart Desktop Claude. The MCP server will be available as a local tool.
+
+---
+
 ## Contributing
 
 Contributions are welcome! Please open issues or submit pull requests for improvements, bug fixes, or new MCP integrations.
