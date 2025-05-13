@@ -26,7 +26,7 @@ A professional, modular testbed for Model Context Protocol (MCP) servers and Cre
   - `single_mcp_app.py`: Example of a single MCP/LLM chat app
 - **llm/**: LLM provider definitions and utilities
 - **project/**: Main project logic, including a multi-agent server that combines two MCPs in a single agent
-- **examplo-env.env**: Example environment file showing required variables for `.env`
+- **example-env.env**: Example environment file showing required variables for `.env`
 
 ---
 
