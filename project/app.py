@@ -3,38 +3,38 @@ import asyncio
 from fastmcp import Client
 import json
 import pandas as pd
+import uuid
+import nest_asyncio
 
-st.set_page_config(page_title="Supabase Analyst Chat", page_icon="📊", layout="wide")
-st.title("Supabase Analyst – AI Chat Interface")
+nest_asyncio.apply()
 
-st.markdown("""
-This professional interface allows you to chat with an AI agent to analyze and manage your Supabase database. You can:
-- Ask questions about your tables and data
-- Retrieve information
-- Perform any CRUD (Create, Read, Update, Delete) operations
+st.set_page_config(page_title="Multi-Agent Analyst Chat", page_icon="🤖", layout="wide")
+st.title("Multi-Agent Analyst – AI Chat Interface")
 
-**All actions are performed securely via the CrewAI-powered agent.**
-""")
+# Unique user memory namespace
+if "user_id" not in st.session_state:
+    st.session_state.user_id = str(uuid.uuid4())
 
-# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat messages from history
+# Display message history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
 
-# Helper: Call the MCP agent server via SSE
-async def call_agent(question: str):
-    client = Client("http://127.0.0.1:8003/sse")  # Replace with your server URL
+# Async call to MCP
+async def call_agent(question: str, user_id: str):
+    client = Client("http://127.0.0.1:8000/sse")
     async with client:
-        result = await client.call_tool("selenium_scraper_tool", {"question": question})
+        result = await client.call_tool(
+            "multi_analyst", {"question": question, "user_id": user_id}
+        )
         return result[0].text if result and hasattr(result[0], "text") else str(result)
 
 
-# Accept user input
+# Chat input
 if prompt := st.chat_input("Ask me anything ..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -42,7 +42,7 @@ if prompt := st.chat_input("Ask me anything ..."):
     with st.chat_message("assistant"):
         with st.spinner("The agent is thinking..."):
             try:
-                response = asyncio.run(call_agent(prompt))
+                response = asyncio.run(call_agent(prompt, st.session_state.user_id))
                 # Try to pretty print JSON or show as DataFrame if possible
                 # If the response is a JSON object with 'raw' and 'tasks_output', extract the most relevant 'raw'
                 try:

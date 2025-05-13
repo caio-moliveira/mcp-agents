@@ -42,7 +42,7 @@ async def yfinance_analyst_tool(question: str) -> str:
                 "retrieving or transforming the right data from financial databases."
             ),
             tools=tools,
-            verbose=True,
+            verbose=False,
             llm=llm,
             allow_delegation=False,
         )
@@ -59,7 +59,7 @@ async def yfinance_analyst_tool(question: str) -> str:
             agents=[finance_analyst],
             tasks=[finance_task],
             process=Process.sequential,
-            verbose=True,
+            verbose=False,
         )
 
         result = await crew.kickoff_async()
@@ -71,16 +71,4 @@ async def yfinance_analyst_tool(question: str) -> str:
 
 if __name__ == "__main__":
     # mcp.run(transport="sse", host="127.0.0.1", port=8005)
-    # mcp.run(transport="stdio")
-    import asyncio
-    import os
-
-    port = os.environ.get("PORT", 8888)
-
-    asyncio.run(
-        mcp.run_sse_async(
-            host="0.0.0.0",
-            port=8888,
-            log_level="debug",
-        )
-    )
+    mcp.run()
