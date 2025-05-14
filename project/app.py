@@ -26,7 +26,7 @@ for message in st.session_state.messages:
 
 # Async call to MCP
 async def call_agent(question: str, user_id: str):
-    client = Client("http://127.0.0.1:8000/sse")
+    client = Client("http://127.0.0.1:8005/sse")
     async with client:
         result = await client.call_tool(
             "multi_analyst", {"question": question, "user_id": user_id}

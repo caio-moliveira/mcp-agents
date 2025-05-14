@@ -5,14 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "crewai-tools>=0.44.0",
-    "crewai>=0.119.0",
-    "fastmcp>=2.2.10",
-    "mcpadapt>=0.1.4",
-    "python-dotenv>=1.1.0",
-    "setuptools>=80.3.1",
-    "streamlit>=1.45.0",
-    "langchain-openai>=0.1.0",
-    "mcp[cli]>=1.5.0",
-    "nest-asyncio>=1.6.0",
+    "crewai-tools[mcp]",
+    "crewai",
+    "fastmcp",
+    "mcpadapt",
+    "python-dotenv",
+    "setuptools",
+    "streamlit",
+    "langchain-openai",
+    "mcp[cli]",
+    "nest-asyncio",
 ]

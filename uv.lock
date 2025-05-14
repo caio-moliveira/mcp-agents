@@ -474,6 +474,12 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ba/80/b91aa837d06edbb472445ea3c92d7619518894fd3049d480e5fffbf0c21b/crewai_tools-0.44.0-py3-none-any.whl", hash = "sha256:119e2365fe66ee16e18a5e8e222994b19f76bafcc8c1bb87f61609c1e39b2463", size = 583462, upload-time = "2025-05-07T21:39:31.407Z" },
 ]
 
+[package.optional-dependencies]
+mcp = [
+    { name = "mcp" },
+    { name = "mcpadapt" },
+]
+
 [[package]]
 name = "cryptography"
 version = "44.0.3"
@@ -1543,7 +1549,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "crewai" },
-    { name = "crewai-tools" },
+    { name = "crewai-tools", extra = ["mcp"] },
     { name = "fastmcp" },
     { name = "langchain-openai" },
     { name = "mcp", extra = ["cli"] },
@@ -1556,16 +1562,16 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "crewai", specifier = ">=0.119.0" },
-    { name = "crewai-tools", specifier = ">=0.44.0" },
-    { name = "fastmcp", specifier = ">=2.2.10" },
-    { name = "langchain-openai", specifier = ">=0.1.0" },
-    { name = "mcp", extras = ["cli"], specifier = ">=1.5.0" },
-    { name = "mcpadapt", specifier = ">=0.1.4" },
-    { name = "nest-asyncio", specifier = ">=1.6.0" },
-    { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "setuptools", specifier = ">=80.3.1" },
-    { name = "streamlit", specifier = ">=1.45.0" },
+    { name = "crewai" },
+    { name = "crewai-tools", extras = ["mcp"] },
+    { name = "fastmcp" },
+    { name = "langchain-openai" },
+    { name = "mcp", extras = ["cli"] },
+    { name = "mcpadapt" },
+    { name = "nest-asyncio" },
+    { name = "python-dotenv" },
+    { name = "setuptools" },
+    { name = "streamlit" },
 ]
 
 [[package]]

@@ -85,4 +85,4 @@ async def multi_analyst_tool(question: str, user_id: str) -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="sse", host="127.0.0.1", port=8000)
+    mcp.run(transport="sse", host="127.0.0.1", port=8005)
