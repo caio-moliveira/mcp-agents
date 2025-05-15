@@ -209,23 +209,35 @@ You can extend this test suite by adding your own MCP servers. This repository i
 
 ### How to Use Your Custom MCP Server
 
+To use your custom MCP server and integrate it as a tool in your own Streamlit application, follow these steps:
+
 1. **Start the Custom MCP Server**
+   
+   This launches the FastMCP server that exposes your ETL functions as tools:
    ```sh
    python my_mcp/etl_mcp_server.py
    ```
-   Or, using the FastMCP CLI:
+
+2. **Start the Agent**
+   
+   This script connects to the running MCP server, wraps it in an agent, and exposes the agent as a tool:
    ```sh
-   fastmcp run my_mcp/etl_mcp_server.py:mcp
+   python my_mcp/etl_agent.py
    ```
 
-2. **Integrate with Streamlit Apps**
-   - You can modify the provided Streamlit apps to include your custom MCP server, or create a new app in the `app/` directory.
+3. **Launch the Streamlit Application**
+   
+   This app uses the agent (now a tool) to provide an interactive UI for your ETL workflows:
+   ```sh
+   streamlit run my_mcp/etl_app.py
+   ```
 
-3. **Expose Functions as Tools**
-   - Use the `@mcp.tool` decorator from FastMCP to turn any Python function into a tool accessible via the MCP protocol.
+**Summary:**
+- The MCP server (`etl_mcp_server.py`) exposes your functions as tools.
+- The agent (`etl_agent.py`) connects to the MCP server and turns the agent into a tool for your app.
+- The Streamlit app (`etl_app.py`) provides a user interface to interact with your agent/tool.
 
-4. **Testing and Development**
-   - Use `my_mcp/test.py` to write and run tests for your custom tools and server logic.
+You can further customize each step to fit your workflow and add more tools or agents as needed.
 
 ---
 
