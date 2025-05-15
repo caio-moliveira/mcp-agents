@@ -27,6 +27,9 @@ A professional, modular testbed for Model Context Protocol (MCP) servers and Cre
 - **llm/**: LLM provider definitions and utilities
 - **project/**: Main project logic, including a multi-agent server that combines two MCPs in a single agent
 - **example-env.env**: Example environment file showing required variables for `.env`
+- **my_mcp/**: Contains your custom MCP server and related modules.
+  - `etl_mcp_server.py`: Example MCP server implementation using FastMCP's `@mcp.tool` decorator to expose functions as tools.
+  - `etl_agent.py`, `etl_app.py`, `test.py`: Additional logic, agent definitions, and tests for your custom server.
 
 ---
 
@@ -192,6 +195,37 @@ Edit your `claude_desktop_config.json` file to add the MCP server. Example confi
 - You can add multiple servers by duplicating the block under `mcpServers` and changing the server name and script.
 
 After saving the config, restart Desktop Claude. The MCP server will be available as a local tool.
+
+---
+
+## Custom MCP Server: `my_mcp`
+
+You can extend this test suite by adding your own MCP servers. This repository includes a sample custom MCP server in the `my_mcp/` directory. This is a great starting point for building and testing your own tools using the FastMCP framework.
+
+### Structure
+- **my_mcp/**: Contains your custom MCP server and related modules.
+  - `etl_mcp_server.py`: Example MCP server implementation using FastMCP's `@mcp.tool` decorator to expose functions as tools.
+  - `etl_agent.py`, `etl_app.py`, `test.py`: Additional logic, agent definitions, and tests for your custom server.
+
+### How to Use Your Custom MCP Server
+
+1. **Start the Custom MCP Server**
+   ```sh
+   python my_mcp/etl_mcp_server.py
+   ```
+   Or, using the FastMCP CLI:
+   ```sh
+   fastmcp run my_mcp/etl_mcp_server.py:mcp
+   ```
+
+2. **Integrate with Streamlit Apps**
+   - You can modify the provided Streamlit apps to include your custom MCP server, or create a new app in the `app/` directory.
+
+3. **Expose Functions as Tools**
+   - Use the `@mcp.tool` decorator from FastMCP to turn any Python function into a tool accessible via the MCP protocol.
+
+4. **Testing and Development**
+   - Use `my_mcp/test.py` to write and run tests for your custom tools and server logic.
 
 ---
 
