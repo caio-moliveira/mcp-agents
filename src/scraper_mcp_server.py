@@ -20,6 +20,8 @@ async def analyze_price_page(url: str) -> str:
         args=["scraper_server.py"],  # Adjust path if needed
     )
 
+    mcp_server_adapter = None  # Fix: Declare early
+
     try:
         mcp_server_adapter = MCPServerAdapter(serverparams)
         tools = mcp_server_adapter.tools
@@ -57,7 +59,8 @@ async def analyze_price_page(url: str) -> str:
         return result
 
     finally:
-        mcp_server_adapter.stop()
+        if mcp_server_adapter is not None:
+            mcp_server_adapter.stop()
 
 
 if __name__ == "__main__":

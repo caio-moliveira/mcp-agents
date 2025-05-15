@@ -6,3 +6,5 @@ https://github.com/upstash/context7
 https://github.com/github/github-mcp-server
 https://github.com/ckreiling/mcp-server-docker?
 https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search
+https://github.com/openbnb-org/mcp-server-airbnb
+https://github.com/angiejones/mcp-selenium
