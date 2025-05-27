@@ -50,7 +50,7 @@ for message in st.session_state.messages:
 
 # Helper: Call the MCP agent server via SSE
 async def call_agent(question: str, csv_path: str = None):
-    client = Client("http://127.0.0.1:8000/sse")
+    client = Client("http://127.0.0.1:8001/sse")
     context = {"question": question}
     if csv_path:
         context["csv_path"] = csv_path

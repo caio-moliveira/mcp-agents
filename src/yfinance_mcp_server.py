@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from fastmcp import FastMCP
 from langchain_openai import ChatOpenAI
-from crewai import Agent, Task, Crew, Process
+from crewai import Agent, Task, Crew, Process, LLM
 from crewai_tools import MCPServerAdapter
 from mcp import StdioServerParameters
 
@@ -25,7 +25,8 @@ async def yfinance_analyst_tool(question: str) -> str:
     try:
         mcp_server_adapter = MCPServerAdapter(serverparams)
         tools = mcp_server_adapter.tools
-        llm = ChatOpenAI(model="gpt-4.1-mini")
+        # llm = ChatOpenAI(model="gpt-4.1-mini")
+        llm = LLM(model="claude-sonnet-4-20250514")
 
         # Define CrewAI agent
         finance_analyst = Agent(

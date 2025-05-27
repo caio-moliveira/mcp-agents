@@ -68,4 +68,4 @@ async def get_data_engineer_agent(question: str, csv_path: str = None) -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="sse", host="127.0.0.1", port=8000)
+    mcp.run(transport="sse", host="127.0.0.1", port=8001)

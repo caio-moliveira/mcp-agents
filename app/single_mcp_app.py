@@ -28,10 +28,10 @@ for message in st.session_state.messages:
 
 # Helper: Call the MCP agent server via SSE
 async def call_agent(question: str):  # or url: str):
-    client = Client("http://127.0.0.1:8000/sse")  # Replace with your server URL
+    client = Client("http://127.0.0.1:8001/sse")  # Replace with your server URL
     async with client:
         result = await client.call_tool(
-            "yfinance_analyst",
+            "search_airbnb",
             {"question": question},  # or {"url": url}
         )  # replace with your tool name
         return result[0].text if result and hasattr(result[0], "text") else str(result)
